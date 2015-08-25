@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Theme Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="theme.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      a:active, a:active * { outline: none !important; -moz-outline-style: none !important; }
+      a:focus, a:focus * { outline: none !important; -moz-outline-style: none !important; }
+
+      .button-vehicle
+      {
+        width: 250px;
+        height: 250px;
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        background-size: 100% 100%;
+        box-sizing: border-box;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        border: 30px solid #fff;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+        background-attachment: scroll;
+        background-position: center center;
+        overflow: hidden;
+      }
+
+      .button-vehicle > span
+      {
+        opacity: 0;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: rgba(0,0,0,.7);
+        color: #fff;
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 200px;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        padding-top: 36%;
+        font-size: 18px;
+        font-weight: bold;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+      }
+
+      .button-vehicle:hover
+      {
+        border: 10px solid #fff;
+      }
+
+      .button-vehicle:hover > span
+      {
+        opacity: 1;
+        top: 0;
+      }
+
+      .button-vehicle.active
+      {
+        border: 10px solid #f00;
+      }
+
+      .land-button
+      {
+        background-image: url(img/car-button.jpg);
+      }
+
+      .water-button
+      {
+        background-image: url(img/boat-button.jpg);
+      }
+
+      .air-button
+      {
+        background-image: url(img/airplane-button.jpg);
+      }
+
+      .hybrid-button
+      {
+        background-image: url(img/hybrid-button.jpg);
+      }
+
+    </style>
+  </head>
+
+  <body role="document">
+
+    
+    <div class="container theme-showcase" role="main">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Choose your vehicle:</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="#" class="button-vehicle land-button" vehicle="land"><span>Land</span></a>
+        </div>
+        <div class="col-md-3">
+          <a href="#" class="button-vehicle water-button" vehicle="water"><span>Water</span></a>
+        </div>
+        <div class="col-md-3">
+          <a href="#" class="button-vehicle air-button" vehicle="air"><span>Air</span></a>
+        </div>
+        <div class="col-md-3">
+          <a href="#" class="button-vehicle hybrid-button" vehicle="hybrid"><span>Hybrid</span></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Animation:</h4>
+        </div>
+      </div>
+      <div class="row">
+        <form class="navbar-form navbar-left form-air hide" role="search" >
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control power" placeholder="Power">
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control afterburner" placeholder="Afterburner">
+              </div>
+             
+            </div>
+            <a class="btn btn-primary " href="#" role="button">Advance</a>
+            <a class="btn btn-primary " href="#" role="button">Reset</a>
+              
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+
+    <!-- Load Vehicle Class -->
+    <script src="js/vehicle.js"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        $("form").submit(function (e){e.preventDefault();});
+
+        $(".button-vehicle").click(function (e){
+          $(".button-vehicle").removeClass("active");
+          $(this).addClass("active");
+
+          var vehicleRequest = $(this).attr("vehicle");
+          $(".form-"+vehicleRequest).removeClass('hide');
+          if(vehicleRequest=='air')
+          {
+            //var vehicle = new airVehicle();
+
+
+          }
+          /*if(vehicleRequest=='air')
+            var vehicle = new airVehicle();
+
+          if(vehicleRequest=='air')
+            var vehicle = new airVehicle();
+
+          if(vehicleRequest=='air')
+            var vehicle = new airVehicle();
+          */
+
+          e.preventDefault();
+        });
+
+
+
+      });
+    </script>
+  </body>
+</html>
