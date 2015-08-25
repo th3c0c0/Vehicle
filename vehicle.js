@@ -5,7 +5,7 @@ function vehicle()
 	this.acelerate = function(){};
 }
 
-function vehicleLand(radiusWheel)
+function landVehicle(radiusWheel)
 {
 	var vehicle = new vehicle();
 	vehicle.radius = radiusWheel || 10;
@@ -16,7 +16,7 @@ function vehicleLand(radiusWheel)
 	return vehicle;
 }
 
-function vehicleAir(power, afterburner)
+function airVehicle(power, afterburner)
 {
 	var vehicle = new vehicle();;
 	vehicle.power = power || 1;
