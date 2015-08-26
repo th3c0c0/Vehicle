@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Theme Template for Bootstrap</title>
+    <title>Exercise for Javascript Training</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -169,7 +169,7 @@
              
             </div>
             <a class="btn btn-primary btn-advance-land" href="#" role="button">Advance</a>
-            <a class="btn btn-primary " href="#" role="button">Reset</a>
+            <a class="btn btn-primary btn-reset-land" href="#" role="button">Reset</a>
               
           </div>
         </form>
@@ -237,14 +237,20 @@
     <script src="js/vehicle.js"></script>
     
     <script type="text/javascript">
-      var vehicle ;
+      var vehicleTest ;
       $(document).ready(function(){
+
+        $(".btn-reset-land").click(function(e){
+          e.preventDefault();
+          $(".vehicle-land").css({'left':0});
+        });
 
         $(".btn-advance-land").click(function(e){
           var radius = $(".radius").val();
-          vehicle = vehicleLand(radius);
+          console.log(vehicleTest);
+          vehicleTest = vehicleTest || vehicleLand(radius);
           var posAct = parseInt($(".vehicle-land").css('left'));
-          $(".vehicle-land").css({'left':posAct + vehicle.acelerate()})
+          $(".vehicle-land").css({'left':posAct + vehicleTest.acelerate()})
           e.preventDefault();
 
         });
