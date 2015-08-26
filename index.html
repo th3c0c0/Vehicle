@@ -34,8 +34,8 @@
 
       .button-vehicle
       {
-        width: 250px;
-        height: 250px;
+        width: 150px;
+        height: 150px;
         display: block;
         position: relative;
         margin: 0 auto;
@@ -246,7 +246,7 @@
           var posAct = parseInt($(".vehicle-land").css('left'));
           $(".vehicle-land").css({'left':posAct + vehicle.acelerate()})
           e.preventDefault();
-          
+
         });
 
         $("form").submit(function (e){e.preventDefault();});
