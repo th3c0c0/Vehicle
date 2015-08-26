@@ -7,13 +7,14 @@ function vehicle()
 
 function vehicleLand(radiusWheel)
 {
-	var vehicle = new vehicle();
-	vehicle.radius = radiusWheel || 10;
-	vehicle.acelerate = function(){
-		return (2 * Math.PI * radius)*4;
+	//var vehicle = new Object(); 
+	var vehicleIn = new vehicle();
+	vehicleIn.radius = radiusWheel || 10;
+	vehicleIn.acelerate = function(){
+		return parseInt(2 * Math.PI * vehicleIn.radius)*4;
 	};
 
-	return vehicle;
+	return vehicleIn;
 }
 
 function vehicleAir(power, afterburner)

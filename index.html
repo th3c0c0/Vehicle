@@ -120,6 +120,12 @@
         position: absolute;
         left: 0;
         top: 0;
+
+        -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        transition: all 1s ease;
       }
 
     </style>
@@ -154,7 +160,21 @@
         </div>
       </div>
       <div class="row">
-        <form class="navbar-form navbar-left form-air hide" role="search" >
+        <form class="navbar-form navbar-left form-land hide"  >
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control radius" placeholder="Radius of wheel">
+              </div>
+             
+            </div>
+            <a class="btn btn-primary btn-advance-land" href="#" role="button">Advance</a>
+            <a class="btn btn-primary " href="#" role="button">Reset</a>
+              
+          </div>
+        </form>
+
+        <form class="navbar-form navbar-left form-air hide"  >
           <div class="col-md-12">
             <div class="form-group">
               <div class="input-group">
@@ -170,6 +190,27 @@
               
           </div>
         </form>
+
+        <form class="navbar-form navbar-left form-water hide" >
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control fins" placeholder="Fins">
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control propellers" placeholder="Propellers">
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control Direction" placeholder="Direction">
+              </div>
+             
+            </div>
+            <a class="btn btn-primary " href="#" role="button">Advance</a>
+            <a class="btn btn-primary " href="#" role="button">Reset</a>
+              
+          </div>
+        </form>
+
       </div>
 
       <div class="row animation">
@@ -196,7 +237,17 @@
     <script src="js/vehicle.js"></script>
     
     <script type="text/javascript">
+      var vehicle ;
       $(document).ready(function(){
+
+        $(".btn-advance-land").click(function(e){
+          var radius = $(".radius").val();
+          vehicle = vehicleLand(radius);
+          var posAct = parseInt($(".vehicle-land").css('left'));
+          $(".vehicle-land").css({'left':posAct + vehicle.acelerate()})
+          e.preventDefault();
+        });
+
         $("form").submit(function (e){e.preventDefault();});
 
         $(".button-vehicle").click(function (e){
@@ -204,15 +255,13 @@
           $(this).addClass("active");
 
           var vehicleRequest = $(this).attr("vehicle");
+          $("form").addClass("hide");
           $(".form-"+vehicleRequest).removeClass('hide');
           $(".vehicle-img").addClass("hide");
           $(".vehicle-"+vehicleRequest).removeClass("hide");
 
-
-          if(vehicleRequest=='air')
-          {
-
-          }
+          
+          
           /*if(vehicleRequest=='air')
             var vehicle = new airVehicle();
 
