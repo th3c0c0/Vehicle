@@ -114,6 +114,14 @@
         background-image: url(img/hybrid-button.jpg);
       }
 
+      .vehicle-img
+      {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
     </style>
   </head>
 
@@ -164,9 +172,14 @@
         </form>
       </div>
 
-      <div class="row">
+      <div class="row animation">
         <div class="col-md-12">
-          
+          <div class="vehicle-animate">
+            <img src="img/water.png" class="vehicle-img vehicle-water hide">
+            <img src="img/air.png" class="vehicle-img vehicle-air hide">
+            <img src="img/land.png" class="vehicle-img vehicle-land hide">
+            <img src="img/hybrid.png" class="vehicle-img vehicle-hybrid hide">
+          </div>
         </div>
       </div>
     </div> <!-- /container -->
@@ -184,7 +197,6 @@
     
     <script type="text/javascript">
       $(document).ready(function(){
-
         $("form").submit(function (e){e.preventDefault();});
 
         $(".button-vehicle").click(function (e){
@@ -193,10 +205,12 @@
 
           var vehicleRequest = $(this).attr("vehicle");
           $(".form-"+vehicleRequest).removeClass('hide');
+          $(".vehicle-img").addClass("hide");
+          $(".vehicle-"+vehicleRequest).removeClass("hide");
+
+
           if(vehicleRequest=='air')
           {
-            //var vehicle = new airVehicle();
-
 
           }
           /*if(vehicleRequest=='air')
