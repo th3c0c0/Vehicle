@@ -11,7 +11,7 @@ function vehicleLand(radiusWheel)
 	var vehicleIn = new vehicle();
 	vehicleIn.radius = radiusWheel || 10;
 	vehicleIn.acelerate = function(){
-		return parseInt(2 * Math.PI * vehicleIn.radius)*4;
+		return (parseInt(2 * Math.PI * vehicleIn.radius)*4)/100;
 	};
 
 	return vehicleIn;
