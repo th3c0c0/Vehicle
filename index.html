@@ -223,6 +223,15 @@
           </div>
         </div>
       </div>
+      
+      <canvas id="canvas-animation" width="470" height="470"></canvas>
+      
+      
+      
+      
+      
+      
+      
     </div> <!-- /container -->
 
 
@@ -237,6 +246,49 @@
     <script src="js/vehicle.js"></script>
     
     <script type="text/javascript">
+	
+	
+	//canvas animation
+		  
+	var sun = new Image();
+	var moon = new Image();
+	var car = new Image();
+	var xPos = 0;
+	function init(){
+	  sun.src = 'https://mdn.mozillademos.org/files/1456/Canvas_sun.png';
+	  moon.src = 'https://mdn.mozillademos.org/files/1443/Canvas_moon.png';
+	  car.src = 'img/land.png';
+	  window.requestAnimationFrame(draw);
+	}
+	
+	function draw() {
+	  var ctx = document.getElementById('canvas-animation').getContext('2d');
+	
+	  ctx.globalCompositeOperation = 'destination-over';
+	  ctx.clearRect(0,0,420,300); // clear canvas
+	
+	  if(xPos > 350)
+	  	xPos =0;
+	  else
+	  	xPos++;
+	  ctx.drawImage(car, xPos,0);
+	
+	  
+	
+	  window.requestAnimationFrame(draw);
+	}
+
+init();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
       var vehicleTest ;
       $(document).ready(function(){
 
@@ -249,7 +301,13 @@
           var radius = $(".radius").val();
           console.log(vehicleTest);
           vehicleTest = vehicleTest || vehicleLand(radius);
+		  vehicleTest.radius = radius;
           var posAct = parseInt($(".vehicle-land").css('left'));
+
+		  
+
+
+
           $(".vehicle-land").css({'left':posAct + vehicleTest.acelerate()})
           e.preventDefault();
 
@@ -268,16 +326,6 @@
           $(".vehicle-"+vehicleRequest).removeClass("hide");
 
           
-          
-          /*if(vehicleRequest=='air')
-            var vehicle = new airVehicle();
-
-          if(vehicleRequest=='air')
-            var vehicle = new airVehicle();
-
-          if(vehicleRequest=='air')
-            var vehicle = new airVehicle();
-          */
 
           e.preventDefault();
         });
