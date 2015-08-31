@@ -11,7 +11,7 @@ function vehicleLand(radiusWheel)
 	var vehicleIn = new vehicle();
 	vehicleIn.radius = radiusWheel || 10;
 	vehicleIn.acelerate = function(){
-		return parseInt((parseInt(2 * Math.PI * vehicleIn.radius)*4)/175);
+		return ((parseInt(2 * Math.PI * vehicleIn.radius)*4)/175);
 	};
 
 	return vehicleIn;
@@ -19,11 +19,11 @@ function vehicleLand(radiusWheel)
 
 function airVehicle(power, afterburner)
 {
-	var vehicle = new vehicle();;
-	vehicle.power = power || 1;
-	vehicle.afterburner = afterburner || 0;
-	vehicle.acelerate = function(){
-		if(switchBurner)
+	var vehicleAir = new vehicle();;
+	vehicleAir.power = power || 1;
+	vehicleAir.afterburner = afterburner || 0;
+	vehicleAir.acelerate = function(){
+		if(vehicleAir.afterburner=='true')
 		{
 			return power*2;
 		}
@@ -33,7 +33,7 @@ function airVehicle(power, afterburner)
 		}
 	}
 
-	return vehicle;
+	return vehicleAir;
 }
 
 function waterVehicle(fins, propellers, direction)

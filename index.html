@@ -181,7 +181,10 @@
                 <input type="text" class="form-control power" placeholder="Power">
               </div>
               <div class="input-group">
-                <input type="text" class="form-control afterburner" placeholder="Afterburner">
+                <select class="form-control afterburner">
+                  <option value="false">Off</option>
+                  <option value="true">On</option>
+                </select>
               </div>
              
             </div>
@@ -260,9 +263,14 @@
 	  var vehicle_water_animate = new Image();
 	  var bck_water_animate = new Image();
 	  var xPos_water = -280;
+
+    //variables para el uso de air
+    var vehicle_air_animate = new Image();
+    var bck_air_animate = new Image();
+    var mask_air_animate = new Image();
+    var xPos_air = -150;
 	  
-    var vehicleTest ;
-	  var vehicle_water;
+    var vehicleTest , vehicle_water, vehicle_air;
       $(document).ready(function(){
 
         $(".btn-reset-land").click(function(e){
@@ -274,8 +282,63 @@
     $(".btn-advance-air").click(function(e){
       var power = $(".power").val();
       var afterburner = $(".afterburner").val();
+      var movY=1, yPos_air=30;
 
       vehicle_air = vehicle_air || airVehicle(power, afterburner);
+      vehicle_air.power = power;
+      vehicle_air.afterburner = afterburner;
+
+      function init_air()
+      {
+        vehicle_air_animate.src = "img/air.png";
+        bck_air_animate.src = "img/sky.jpg";
+        mask_air_animate.src="img/mask-sky.png";
+        window.requestAnimationFrame(draw_air);
+      }
+
+      function draw_air()
+      {
+        var ctx = document.getElementById('canvas-animation-land').getContext('2d');
+        
+
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.clearRect(0,0,1140,300); // clear canvas
+
+        if(xPos_air>1130)
+        {
+          xPos_air=-150;
+        }
+        else
+        {
+          xPos_air+=(vehicle_air.acelerate()/5);
+        }
+        
+
+        if(movY==1)
+          yPos_air+=.5;
+        if(movY==0)
+          yPos_air-=.5;
+        
+        if(yPos_air<10)
+          movY=1;
+
+        if(yPos_air>40)
+          movY=0;
+
+        console.log("yPos_air"+yPos_air);
+
+
+        ctx.drawImage(mask_air_animate,0,0)
+        ctx.drawImage(vehicle_air_animate, xPos_air,yPos_air);
+        ctx.drawImage(bck_air_animate,0,0);
+        window.requestAnimationFrame(draw_air);
+      }
+
+      init_air();
+
+
+
+      
 
       e.preventDefault();
     });
@@ -285,6 +348,10 @@
 			var propellers = $(".propellers").val();
 			var direction = $(".direction").val();
 			vehicle_water = vehicle_water || waterVehicle(fins, propellers, direction);
+
+      vehicle_water.fins = fins;
+      vehicle_water.propellers = propellers;
+      vehicle_water.direction = direction;
 			
 			function init_water()
 			{
@@ -317,8 +384,8 @@
 			  console.log("xPos:::::::"+xPos_water);
 				
 				ctx.drawImage(vehicle_water_animate, xPos_water,50);
-			    ctx.drawImage(bck_water_animate,0,0);
-			    window.requestAnimationFrame(draw_water);
+			  ctx.drawImage(bck_water_animate,0,0);
+			  window.requestAnimationFrame(draw_water);
 			}
 			init_water();
 			
@@ -328,7 +395,7 @@
         $(".btn-advance-land").click(function(e){
           var radius = $(".radius").val();
           vehicleTest = vehicleTest || vehicleLand(radius);
-		  vehicleTest.radius = radius;
+		      vehicleTest.radius = radius;
 		  
 			//canvas animation
 		  	function init(){
