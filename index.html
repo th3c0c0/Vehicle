@@ -213,6 +213,7 @@
 
       </div>
 
+	<!--
       <div class="row animation">
         <div class="col-md-12">
           <div class="vehicle-animate">
@@ -223,7 +224,7 @@
           </div>
         </div>
       </div>
-      
+      -->
       <canvas id="canvas-animation" width="470" height="470"></canvas>
       
       
@@ -253,6 +254,7 @@
         $(".btn-reset-land").click(function(e){
           e.preventDefault();
           $(".vehicle-land").css({'left':0});
+		  //document.getElementById("canvas-animation").clearRect(0, 0, 370,370);
         });
 
         $(".btn-advance-land").click(function(e){
@@ -266,37 +268,32 @@
 			//canvas animation
 		  
 			var car = new Image();
-			var xPos = 0;
+			var bck = new Image();
+			var xPos = -280;
 			function init(){
 			  car.src = 'img/land.png';
+			  bck.src = 'img/road.jpg';
 			  window.requestAnimationFrame(draw);
 			}
 			
 			function draw() {
 			  var ctx = document.getElementById('canvas-animation').getContext('2d');
-			
+				
 			  ctx.globalCompositeOperation = 'destination-over';
-			  ctx.clearRect(0,0,420,300); // clear canvas
+			  ctx.clearRect(0,0,470,470); // clear canvas
 			
-			  if(xPos > 350)
-				xPos =0;
+			  if(xPos > 460)
+				xPos =-280;
 			  else
 				xPos+= vehicleTest.acelerate();
 			  
 			  
-			  console.log("Aceleracion:"+vehicleTest.acelerate());
-
-
-
-			  ctx.drawImage(car, xPos,0);
-			
+			  ctx.drawImage(car, xPos,20);
+			  ctx.drawImage(bck,0,0);
 			  window.requestAnimationFrame(draw);
 			}
 		
 		init();
-
-
-          //$(".vehicle-land").css({'left':posAct + vehicleTest.acelerate()})
           e.preventDefault();
 
         });
