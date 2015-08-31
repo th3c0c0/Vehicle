@@ -201,11 +201,11 @@
                 <input type="text" class="form-control propellers" placeholder="Propellers">
               </div>
               <div class="input-group">
-                <input type="text" class="form-control Direction" placeholder="Direction">
+                <input type="text" class="form-control direction" placeholder="Direction left/right">
               </div>
              
             </div>
-            <a class="btn btn-primary " href="#" role="button">Advance</a>
+            <a class="btn btn-primary btn-advance-water" href="#" role="button">Advance</a>
             <a class="btn btn-primary " href="#" role="button">Reset</a>
               
           </div>
@@ -251,11 +251,12 @@
 	  var bck_land = new Image();
 	  var xPos_land = -280;
 	  
-	  var vehicle_water = new Image();
-	  var bck_water = new Image();
+	  var vehicle_water_animate = new Image();
+	  var bck_water_animate = new Image();
 	  var xPos_water = -280;
 	  
       var vehicleTest ;
+	  var vehicle_water;
       $(document).ready(function(){
 
         $(".btn-reset-land").click(function(e){
@@ -265,14 +266,46 @@
         });
 		
 		
-		
+		$(".btn-advance-water").click(function(e) {
+            var fins = $(".fins").val();
+			var propellers = $(".propellers").val();
+			var direction = $(".direction").val();
+			vehicle_water = vehicle_water || waterVehicle(fins, propellers, direction);
+			
+			function init_water()
+			{
+				vehicle_water_animate.src = "img/water.png";
+				bck_water_animate.src = "img/ocean.jpg";
+				window.requestAnimationFrame(draw_water);
+			}
+			
+			function draw_water()
+			{
+				var ctx = document.getElementById('canvas-animation-land').getContext('2d');
+				ctx.globalCompositeOperation = 'destination-over';
+			    ctx.clearRect(0,0,1140,300); // clear canvas
+				
+				if(xPos_water>1130)
+					xPos_water=-430;
+				else
+					xPos_water+=(vehicle_water.acelerate()/1.5);
+				
+			  console.log("Accelerate:"+vehicle_water.acelerate());
+			  console.log("xPos:::::::"+xPos_water);
+				
+				ctx.drawImage(vehicle_water_animate, xPos_water,50);
+			    ctx.drawImage(bck_water_animate,0,0);
+			    window.requestAnimationFrame(draw_water);
+			}
+			init_water();
+			
+			e.preventDefault();
+        });;
 		
         $(".btn-advance-land").click(function(e){
           var radius = $(".radius").val();
-          console.log(vehicleTest);
           vehicleTest = vehicleTest || vehicleLand(radius);
 		  vehicleTest.radius = radius;
-		  console.log("Radius:::::"+vehicleTest.radius);
 		  
 			//canvas animation
 		  	function init(){
@@ -283,11 +316,9 @@
 			
 			function draw() {
 			  var ctx = document.getElementById('canvas-animation-land').getContext('2d');
-			  console.log("Accelerate:"+vehicleTest.acelerate());
-			  console.log("xPos:::::::"+xPos_land);
 			  ctx.globalCompositeOperation = 'destination-over';
 			  ctx.clearRect(0,0,1140,300); // clear canvas
-			  //console.log(xPos_land);
+
 			  if(xPos_land > 1140)
 				xPos_land =-280;
 			  else

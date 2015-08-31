@@ -38,18 +38,19 @@ function vehicleAir(power, afterburner)
 
 function waterVehicle(fins, propellers, direction)
 {
-	var vehicle = new vehicle();
-	vehicle.direction = direction || 'left';
-	vehicle.fins = fins || 1;
-	vehicle.propellers = propellers || 1;
+	var vehicleW = new vehicle();
+	vehicleW.direction = direction || 'left';
+	vehicleW.fins = fins || 1;
+	vehicleW.propellers = propellers || 1;
 
-	vehicle.acelerate = function ()
+	vehicleW.acelerate = function ()
 	{
 		if(direction=='left')
-			return propellers-fins;
-		if(direction=='right')
 			return propellers*fins;
+		if(direction=='right')
+			return propellers*fins*-1;
 	}
+	return vehicleW;
 }
 
 function hybridVehicle(wheelsRadius, fins, propellers, direction, switchType)
