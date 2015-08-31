@@ -17,7 +17,7 @@ function vehicleLand(radiusWheel)
 	return vehicleIn;
 }
 
-function vehicleAir(power, afterburner)
+function airVehicle(power, afterburner)
 {
 	var vehicle = new vehicle();;
 	vehicle.power = power || 1;

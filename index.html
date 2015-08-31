@@ -185,7 +185,7 @@
               </div>
              
             </div>
-            <a class="btn btn-primary " href="#" role="button">Advance</a>
+            <a class="btn btn-primary btn-advance-air" href="#" role="button">Advance</a>
             <a class="btn btn-primary " href="#" role="button">Reset</a>
               
           </div>
@@ -271,6 +271,14 @@
 		  //document.getElementById("canvas-animation").clearRect(0, 0, 370,370);
         });
 		
+    $(".btn-advance-air").click(function(e){
+      var power = $(".power").val();
+      var afterburner = $(".afterburner").val();
+
+      vehicle_air = vehicle_air || airVehicle(power, afterburner);
+
+      e.preventDefault();
+    });
 		
 		$(".btn-advance-water").click(function(e) {
       var fins = $(".fins").val();
@@ -289,8 +297,9 @@
 			{
 				var ctx = document.getElementById('canvas-animation-land').getContext('2d');
 				ctx.globalCompositeOperation = 'destination-over';
-			    ctx.clearRect(0,0,1140,300); // clear canvas
-				if(direction=='left')
+			  ctx.clearRect(0,0,1140,300); // clear canvas
+				
+        if(direction=='left')
         {
   				if(xPos_water>1130)
   					xPos_water=-430;
