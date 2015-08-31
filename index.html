@@ -225,7 +225,7 @@
         </div>
       </div>
       -->
-      <canvas id="canvas-animation" width="470" height="470"></canvas>
+      <canvas id="canvas-animation-land" width="1140" height="300" style="background-image:url('img/road.png');"></canvas>
       
       
       
@@ -247,7 +247,14 @@
     <script src="js/vehicle.js"></script>
     
     <script type="text/javascript">
-	
+	  var vehicle_land = new Image();
+	  var bck_land = new Image();
+	  var xPos_land = -280;
+	  
+	  var vehicle_water = new Image();
+	  var bck_water = new Image();
+	  var xPos_water = -280;
+	  
       var vehicleTest ;
       $(document).ready(function(){
 
@@ -256,44 +263,42 @@
           $(".vehicle-land").css({'left':0});
 		  //document.getElementById("canvas-animation").clearRect(0, 0, 370,370);
         });
-
+		
+		
+		
+		
         $(".btn-advance-land").click(function(e){
           var radius = $(".radius").val();
           console.log(vehicleTest);
           vehicleTest = vehicleTest || vehicleLand(radius);
 		  vehicleTest.radius = radius;
-          var posAct = parseInt($(".vehicle-land").css('left'));
-
+		  console.log("Radius:::::"+vehicleTest.radius);
 		  
 			//canvas animation
-		  
-			var car = new Image();
-			var bck = new Image();
-			var xPos = -280;
-			function init(){
-			  car.src = 'img/land.png';
-			  bck.src = 'img/road.jpg';
+		  	function init(){
+			  vehicle_land.src = 'img/land.png';
+			  bck_land.src = 'img/road.jpg';
 			  window.requestAnimationFrame(draw);
 			}
 			
 			function draw() {
-			  var ctx = document.getElementById('canvas-animation').getContext('2d');
-				
+			  var ctx = document.getElementById('canvas-animation-land').getContext('2d');
+			  console.log("Accelerate:"+vehicleTest.acelerate());
+			  console.log("xPos:::::::"+xPos_land);
 			  ctx.globalCompositeOperation = 'destination-over';
-			  ctx.clearRect(0,0,470,470); // clear canvas
-			
-			  if(xPos > 460)
-				xPos =-280;
+			  ctx.clearRect(0,0,1140,300); // clear canvas
+			  //console.log(xPos_land);
+			  if(xPos_land > 1140)
+				xPos_land =-280;
 			  else
-				xPos+= vehicleTest.acelerate();
+				xPos_land += vehicleTest.acelerate();
 			  
 			  
-			  ctx.drawImage(car, xPos,20);
-			  ctx.drawImage(bck,0,0);
+			  ctx.drawImage(vehicle_land, xPos_land,20);
+			  ctx.drawImage(bck_land,0,0);
 			  window.requestAnimationFrame(draw);
 			}
-		
-		init();
+			init();
           e.preventDefault();
 
         });
