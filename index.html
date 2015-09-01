@@ -227,7 +227,7 @@
                 </select>
               </div>
               <div class="input-group">
-                <input type="text" class="form-control" id="radius_hybrid" placeholder="Radius">
+                <input type="text" class="form-control radius_hybrid" id="" placeholder="Radius">
               </div>
               <div class="input-group">
                 <input type="text" class="form-control fins" placeholder="Fins">
@@ -251,28 +251,9 @@
 
       </div>
 
-	<!--
-      <div class="row animation">
-        <div class="col-md-12">
-          <div class="vehicle-animate">
-            <img src="img/water.png" class="vehicle-img vehicle-water hide">
-            <img src="img/air.png" class="vehicle-img vehicle-air hide">
-            <img src="img/land.png" class="vehicle-img vehicle-land hide">
-            <img src="img/hybrid.png" class="vehicle-img vehicle-hybrid hide">
-          </div>
-        </div>
-      </div>
-      -->
-      <canvas id="canvas-animation-land" width="1140" height="300" style="background-image:url('img/road.png');"></canvas>
-      
-      
-      
-      
-      
-      
-      
+      <canvas id="canvas-animation-land" width="1140" height="300" ></canvas>
+            
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -302,7 +283,12 @@
     var mask_air_animate = new Image();
     var xPos_air = -150;
 	  
-    var vehicleTest , vehicle_water, vehicle_air;
+    //variables para el uso de hybrid
+    var vehicle_hybrid_animate = new Image();
+    var bck_hybrid_animate = new Image();
+    var xPos_hybrid= -280;
+
+    var vehicleTest , vehicle_water, vehicle_air, vehicle_hybrid;
       $(document).ready(function(){
 
         $(".btn-reset-land").click(function(e){
@@ -310,11 +296,61 @@
           $(".vehicle-land").css({'left':0});
 		  //document.getElementById("canvas-animation").clearRect(0, 0, 370,370);
         });
-	$(".btn-advance-hybrid").click(function(e) {
-        
-		
-		e.preventDefault();
-    });
+    	
+      $(".btn-advance-hybrid").click(function(e) {
+        var type_vehicle = $(".switch-hybrid").val();
+        var radius, fins, propellers, direction;
+
+        radius = $(".radius_hybrid").val();
+        fins = $(".fins_hybrid").val();
+        propellers = $(".radius_hybrid").val();
+        direction = $(".direction_hybrid").val();
+
+        vehicle_hybrid = vehicle_hybrid || new vehicle_hybrid();
+        vehicle_hybrid.type_vehicle = type_vehicle;
+        if(type_vehicle=='land')
+        {
+          vehicle_hybrid.radius = radius;
+          function init_hybrid()
+          {
+            vehicle_hybrid_animate.src = "img/land.png";
+            bck_hybrid_animate.src = "img/pista.jpg";
+            //mask_air_animate.src="img/mask-sky.png";
+            window.requestAnimationFrame(draw_hybrid);
+            xPos_hybrid=-280;
+          }
+
+          function draw_hybrid() {
+            var ctx = document.getElementById('canvas-animation-land').getContext('2d');
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.clearRect(0,0,1140,300); // clear canvas
+
+            if(xPos_hybrid > 1140)
+            xPos_hybrid =-280;
+            else
+            xPos_hybrid += vehicle_hybrid.acelerate();
+            
+            
+            ctx.drawImage(vehicle_hybrid_animate, xPos_hybrid,20);
+            ctx.drawImage(bck_hybrid_animate,0,0);
+            window.requestAnimationFrame(draw_hybrid);
+          }
+
+          init_hybrid();
+        } 
+        else
+        {
+          fins = $(".fins_hybrid").val();
+          propellers = $(".propellers_hybrid").val();
+          direction = $(".direction_hybrid").val();;
+    		}
+
+
+
+    		e.preventDefault();
+      });
+
+
     $(".btn-advance-air").click(function(e){
       var power = $(".power").val();
       var afterburner = $(".afterburner").val();

@@ -55,16 +55,16 @@ function waterVehicle(fins, propellers, direction)
 
 function hybridVehicle(wheelsRadius, fins, propellers, direction, switchType)
 {
-	var vehicle = new vehicle();
-	vehicle.type = switchType || 'land';
-	vehicle.radius = wheelsRadius || 10;
-	vehicle.fins = fins || 1;
-	vehicle.propellers = propellers || 1;
-	vehicle.direction = direction || 'left';
+	var vehicleHybrid = new vehicle();
+	vehicleHybrid.type_vehicle = switchType || 'land';
+	vehicleHybrid.radius = wheelsRadius || 10;
+	vehicleHybrid.fins = fins || 1;
+	vehicleHybrid.propellers = propellers || 1;
+	vehicleHybrid.direction = direction || 'left';
 	
-	vehicle.acelerate = function()
+	vehicleHybrid.acelerate = function()
 	{
-		if(vehicle.type =='land')
+		if(vehicleHybrid.type_vehicle =='land')
 		{
 			return (2 * Math.PI * radius)*4;
 		}
