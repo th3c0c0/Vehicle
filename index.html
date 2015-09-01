@@ -216,6 +216,38 @@
               
           </div>
         </form>
+        
+        <form class="navbar-form navbar-left form-hybrid hide" >
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <select name="switch-hybrid" class="form-control switch-hybrid">
+                  <option value="land">Land</option>
+                  <option value="water">Water</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control" id="radius_hybrid" placeholder="Radius">
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control fins" placeholder="Fins">
+              </div>
+              <div class="input-group">
+                <input type="text" class="form-control propellers" placeholder="Propellers">
+              </div>
+              <div class="input-group">
+                <select class="form-control direction">
+                  <option value="left">Left</option>
+                  <option value="right">Right</option>
+                </select>
+              </div>
+             
+            </div>
+            <a class="btn btn-primary btn-advance-hybrid" href="#" role="button">Advance</a>
+            <a class="btn btn-primary " href="#" role="button">Reset</a>
+              
+          </div>
+        </form>
 
       </div>
 
@@ -278,7 +310,11 @@
           $(".vehicle-land").css({'left':0});
 		  //document.getElementById("canvas-animation").clearRect(0, 0, 370,370);
         });
+	$(".btn-advance-hybrid").click(function(e) {
+        
 		
+		e.preventDefault();
+    });
     $(".btn-advance-air").click(function(e){
       var power = $(".power").val();
       var afterburner = $(".afterburner").val();
